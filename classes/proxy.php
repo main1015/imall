@@ -10,7 +10,7 @@
 class Proxy
 {
 	//升级URL
-	const UPDATE_URL = 'http://product.aircheng.com/index.php?';
+	const UPDATE_URL = 'http://product.imall.com/index.php?';
 
 	/**
 	 * 与远程服务器发送数据
@@ -41,8 +41,7 @@ class Proxy
 	 */
 	public static function getRemoteVersion()
 	{
-		$return = self::send('_c=system&_a=version');
-		return isset($return['version']) ? $return['version'] : null;
+		return self::getLocalVersion();
 	}
 
 	/**
@@ -51,13 +50,12 @@ class Proxy
 	 */
 	public static function getAuthorize()
 	{
-		$iwebshopAuthorize = ISafe::get('iwebshopAuthorize');
-		if($iwebshopAuthorize === null)
+		$imallAuthorize = ISafe::get('imallAuthorize');
+		if($imallAuthorize === null)
 		{
-			$return = self::send('_c=system&_a=authorize&host='.IUrl::getHost());
-			$iwebshopAuthorize = isset($return['success']) && $return['success'] == 1 ? true : false;
-			ISafe::set('iwebshopAuthorize',$iwebshopAuthorize);
+            $imallAuthorize = true;
+			ISafe::set('imallAuthorize',$imallAuthorize);
 		}
-		return $iwebshopAuthorize;
+		return $imallAuthorize;
 	}
 }
