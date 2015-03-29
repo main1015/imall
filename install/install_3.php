@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>IWebShop安装向导(三)</title>
+<title>IMall安装向导(三)</title>
 <link rel="stylesheet" href="css/install.css" />
 <script type='text/javascript' src='javascript/jquery-1.4.4.min.js'></script>
 </head>
 <body>
 <div class="container">
-	<div class="head"><img src="images/logo.gif" width="354" height="53" alt="iWebShop安装向导" /></div>
+    <div class="head"><img src="images/logo.png" width="100" height="45" alt="iMall安装向导" /></div>
 	<div class="ins_box clearfix">
 		<div class="cont clearfix">
 			<ul class="step">
@@ -20,7 +20,7 @@
 
 			<form action='index.php?act=install_sql' method='post' target="install_iframe" onsubmit="return check_form();">
 				<div class="log_box">
-					<h2><img src="images/guide_3.gif" width="82" height="15" /></h2>
+					<h2><img src="images/guide_3.png" width="106" height="22" /></h2>
 
 					<div class="red_box" style='display:none' id='error_div'>
 						<img src="images/error.gif" width="16" height="15" />
@@ -46,7 +46,7 @@
 								</tr>
 								<tr>
 									<th>数据库表前缀</th>
-									<td><input class="gray" type="text" value='iwebshop_' name='db_pre' /><br /><label class="error" id='db_pre_label' style='display:none'><img src="images/failed.gif" width="16" height="15" />请填写正确的表前缀字符</label></td>
+									<td><input class="gray" type="text" value='imall_' name='db_pre' /><br /><label class="error" id='db_pre_label' style='display:none'><img src="images/failed.gif" width="16" height="15" />请填写正确的表前缀字符</label></td>
 								</tr>
 								<tr>
 									<th></th><td><input class="check" type="button" onclick="check_mysql();" /></td>
@@ -86,6 +86,7 @@
 							<hr />
 
 							<strong>安装选择</strong>
+                            <!-- //todo del -->
 							<label><input class="radio" type="radio" name='install_type' value='all' />测试数据版本(<span style="color:red">确认PC能访问公网，采集的时间需要5-10分钟，如果安装失败建议纯净版本</span>)</label><br />
 							<label><input class="radio" type="radio" name='install_type' checked="checked" value='simple' />绿色纯净版</label>
 
@@ -105,7 +106,6 @@
 		</div>
 		<span class="l"></span><span class="r"></span><span class="b_l"></span><span class="b_r"></span>
 	</div>
-	<div class="foot"><a href="http://www.aircheng.com">关于我们</a>|<a href="http://www.aircheng.com">官方网站</a>|<a href="http://www.aircheng.com">联系我们</a>|<a href="">©2005-2014</a></div>
 </div>
 
 <iframe name='install_iframe' style='width:0px;height:0px;display:none' src='#'></iframe>

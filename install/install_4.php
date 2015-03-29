@@ -10,12 +10,12 @@ if(!$is_success)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>IWebShop安装向导(四)</title>
+<title>IMall安装向导(四)</title>
 <link rel="stylesheet" href="css/install.css" />
 </head>
 <body>
 <div class="container">
-	<div class="head"><img src="images/logo.gif" width="354" height="53" alt="iWebShop安装向导" /></div>
+    <div class="head"><img src="images/logo.png" width="100" height="45" alt="iMall安装向导" /></div>
 	<div class="ins_box clearfix">
 		<div class="cont clearfix">
 			<ul class="step">
@@ -25,7 +25,7 @@ if(!$is_success)
 				<li id="step_4" class="current"></li>
 			</ul>
 			<div class="log_box">
-				<h2><img src="images/guide_4.gif" width="83" height="17" /></h2>
+				<h2><img src="images/guide_4.png" width="89" height="22" /></h2>
 
 				<div class="gray_box">
 					<div class="box clearfix">
@@ -39,7 +39,6 @@ if(!$is_success)
 		</div>
 		<span class="l"></span><span class="r"></span><span class="b_l"></span><span class="b_r"></span>
 	</div>
-	<div class="foot"><a href="http://www.jooyea.cn">关于我们</a>|<a href="http://www.jooyea.cn">官方网站</a>|<a href="http://www.jooyea.cn">联系我们</a>|<a href="">©2005-2014</a></div>
 </div>
 </body>
 </html>

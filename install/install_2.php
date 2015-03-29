@@ -5,12 +5,12 @@ $checkObj = new checkConfig();
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>IWebShop安装向导(二)</title>
+<title>IMall安装向导(二)</title>
 <link rel="stylesheet" href="css/install.css" />
 </head>
 <body>
 <div class="container">
-	<div class="head"><img src="images/logo.gif" width="354" height="53" alt="iWebShop安装向导" /></div>
+    <div class="head"><img src="images/logo.png" width="100" height="45" alt="iMall安装向导" /></div>
 	<div class="ins_box clearfix">
 		<div class="cont clearfix">
 			<ul class="step">
@@ -20,7 +20,7 @@ $checkObj = new checkConfig();
 				<li id="step_4"></li>
 			</ul>
 			<div class="log_box">
-				<h2><img src="images/guide_2.gif" width="112" height="15" /></h2>
+				<h2><img src="images/guide_2.png" width="147" height="21" /></h2>
 
 				<div class="green_box" style='display:none' id='right_div'>
 					<img src="images/right.gif" width="19" height="18" />
@@ -29,7 +29,7 @@ $checkObj = new checkConfig();
 
 				<div class="red_box" style='display:none' id='error_div'>
 					<img src="images/error.gif" width="16" height="15" />
-					您的系统配置不具备安装IWebShop软件，有疑问可以访问：<a href='http://bbs.aircheng.com' target='_blank'>http://bbs.aircheng.com</a>
+					您的系统配置不具备安装IMall软件，有疑问可以访问：<a href='http://bbs.imall.com' target='_blank'>http://bbs.imall.com</a>
 				</div>
 
 				<div class="gray_box">
@@ -115,7 +115,6 @@ $checkObj = new checkConfig();
 		</div>
 		<span class="l"></span><span class="r"></span><span class="b_l"></span><span class="b_r"></span>
 	</div>
-	<div class="foot"><a href="http://www.jooyea.cn">关于我们</a>|<a href="http://www.jooyea.cn">官方网站</a>|<a href="http://www.jooyea.cn">联系我们</a>|<a href="">©2005-2014</a></div>
 </div>
 
 <script type='text/javascript'>

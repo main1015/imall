@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>IWebShop安装向导(一)</title>
+<title>IMall安装向导(一)</title>
 <link rel="stylesheet" href="css/install.css" />
 </head>
 <body>
 <div class="container">
-	<div class="head"><img src="images/logo.gif" width="354" height="53" alt="iWebShop安装向导" /></div>
+	<div class="head"><img src="images/logo.png" width="100" height="45" alt="iMall安装向导" /></div>
 	<div class="ins_box clearfix">
 		<div class="cont clearfix">
 			<ul class="step">
@@ -17,7 +17,7 @@
 				<li id="step_4"></li>
 			</ul>
 			<div class="log_box">
-				<h2><img src="images/guide_1.gif" width="203" height="15" /></h2>
+				<h2><img src="images/guide_1.png" width="218" height="22" /></h2>
 
 				<div class="red_box" style='display:none' id='error_div'>
 					<img src="images/error.gif" width="16" height="15" />
@@ -38,7 +38,7 @@
 						}
 						else
 						{
-							echo "本地协议不存在，请访问： <a href='http://www.jooyea.cn' target='_blank'>http://www.jooyea.cn</a> 阅读相关协议";
+							echo "本地协议不存在，请访问： <a href='http://www.imall.cn' target='_blank'>http://www.imall.cn</a> 阅读相关协议";
 						}
 						?>
 					</div>
@@ -49,7 +49,6 @@
 		</div>
 		<span class="l"></span><span class="r"></span><span class="b_l"></span><span class="b_r"></span>
 	</div>
-	<div class="foot"><a href="http://www.jooyea.cn">关于我们</a>|<a href="http://www.jooyea.cn">官方网站</a>|<a href="http://www.jooyea.cn">联系我们</a>|<a href="">©2005-2014</a></div>
 </div>
 
 <script type='text/javascript'>
