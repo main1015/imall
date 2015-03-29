@@ -22,7 +22,6 @@
 		<a href="javascript:void(0);" onclick="selectAll('check[]')"><button class="operating_btn" type="button"><span class="sel_all">全选</span></button></a>
 		<a href="javascript:void(0);" onclick="delModel({form:'member_list',msg:'确定要删除所选中的会员吗？<br />删除的会员可以从回收站找回。'})"><button class="operating_btn" type="button"><span class="delete">批量删除</span></button></a>
 		<a href="javascript:void(0);"><button class="operating_btn" type="button" onclick="window.location='{url:/member/recycling}'"><span class="recycle">回收站</span></button></a>
-		<a href="javascript:void(0);" onclick="balance_add()"><button class="operating_btn" type="button"><span class="recharge">预付款管理</span></button></a>
 	</div>
 	<div class="field">
 		<table class="list_table">
@@ -33,7 +32,6 @@
 				<col width="80px" />
 				<col width="50px" />
 				<col width="140px"/>
-				<col width="80px" />
 				<col width="80px" />
 				<col width="50px" />
 				<col width="125px" />
@@ -49,7 +47,6 @@
 					<th>姓名</th>
 					<th>性别</th>
 					<th>Email</th>
-					<th>余额</th>
 					<th>积分</th>
 					<th>状态</th>
 					<th>注册日期</th>
@@ -72,7 +69,6 @@
 				<col width="50px" />
 				<col width="140px"/>
 				<col width="80px" />
-				<col width="80px" />
 				<col width="50px" />
 				<col width="125px" />
 				<col width="120px" />
@@ -89,7 +85,7 @@
 					<td title="{$item['true_name']}">{$item['true_name']}</td>
 					<td>{if:$item['sex']=='1'}男{else:}女{/if}</td>
 					<td title="{$item['email']}">{$item['email']}</td>
-					<td title="{$item['balance']}">{$item['balance']}</td>
+					<!--<td title="{$item['balance']}">{$item['balance']}</td>-->
 					<td title="{$item['point']}">{$item['point']}</td>
 					<td title="{echo:Common::userStatusText($item['status'])}">{echo:Common::userStatusText($item['status'])}</td>
 					<td title="{$item['time']}">{$item['time']}</td>
@@ -113,42 +109,4 @@ $(function(){
 	formObj.init({'search':'{$search}'});
 })
 
-//预付款管理入口
-function balance_add()
-{
-	if(!checkboxCheck('check[]','请选择要进行预付款操作的用户！'))
-	{
-		return;
-	}
-
-	art.dialog.open("{url:/member/member_balance}",{
-	    title: '预付款管理',
-	    ok:function(iframeWin, topWin)
-	    {
-	    	var formObject = iframeWin.document.forms['balanceForm'];
-	    	formObject.onsubmit();
-
-	    	if($(formObject).find('.invalid-text').length > 0)
-	    	{
-	    		return false;
-	    	}
-
-	    	//进行post提交
-	    	var postData = $('[name="member_list"]').serialize()+'&'+$(formObject).serialize();
-	    	$.post('{url:/member/member_recharge}',postData,function(json){
-	    		if(json.flag == 'success')
-	    		{
-	    			tips('操作成功');
-	    			window.location.reload();
-	    			return false;
-	    		}
-	    		else
-	    		{
-	    			alert(json.message);
-	    			return false;
-	    		}
-	    	},'json');
-		}
-	});
-}
 </script>
