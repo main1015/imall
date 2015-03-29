@@ -106,7 +106,7 @@ class Menu
       			'/market/amount'       => '销售金额统计'
 			),
 			'日志操作记录'=>array(
-				'/market/account_list'   => '充值操作记录',
+//				'/market/account_list'   => '充值操作记录',
 				'/market/operation_list' => '后台操作记录',
 			),
 			'商户数据统计'=>array(
