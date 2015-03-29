@@ -51,10 +51,10 @@ class Menu
 	     		'/member/group_list' => '会员组列表',
 //	     		'/member/withdraw_list'=>'会员提现管理'
 			),
-			'商户管理' => array(
-				'/member/seller_list' => '商户列表',
-				'/member/seller_edit' => '添加商户',
-			),
+//			'商户管理' => array(
+//				'/member/seller_list' => '商户列表',
+//				'/member/seller_edit' => '添加商户',
+//			),
 			'信息处理' => array(
 				'/comment/suggestion_list'  => '建议管理',
 				'/comment/refer_list'		=> '咨询管理',
