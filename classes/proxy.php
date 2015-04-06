@@ -50,12 +50,7 @@ class Proxy
 	 */
 	public static function getAuthorize()
 	{
-		$imallAuthorize = ISafe::get('imallAuthorize');
-		if($imallAuthorize === null)
-		{
-            $imallAuthorize = true;
-			ISafe::set('imallAuthorize',$imallAuthorize);
-		}
-		return $imallAuthorize;
+        $imallAuthorize = true;
+        return $imallAuthorize;
 	}
 }
