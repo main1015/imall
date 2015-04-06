@@ -14,6 +14,11 @@
  */
 class Hsms
 {
+
+    /***
+     * @var string 短信签名
+     */
+    private static $signature = "imall";
 	/**
 	 * @brief 获取config用户配置
 	 * @return array
@@ -38,24 +43,34 @@ class Hsms
 	public static function send($mobile,$content)
 	{
 		$config = self::getConfig();
+//		$post_data = array(
+//			'userid'   => $config['userid'],
+//			'account'  => $config['username'],
+//			'password' => $config['userpwd'],
+//			'content'  => $content,
+//			'mobile'   => $mobile,
+//			'sendtime' => '',
+//		);
+//
+//		$url    = 'http://www.duanxin10086.com/sms.aspx?action=send';
 
-		$post_data = array(
-			'userid'   => $config['userid'],
-			'account'  => $config['username'],
-			'password' => $config['userpwd'],
-			'content'  => $content,
-			'mobile'   => $mobile,
-			'sendtime' => '',
-		);
-
-		$url    = 'http://www.duanxin10086.com/sms.aspx?action=send';
+        $post_data = array(
+            'account' => $config['username'],
+            'pwd' => $config['userpwd'],
+            'product' => $config['userid'],
+            'mobile' => $mobile,
+            'message' => $content,
+        );
+        $url = 'http://dx.10659com.com:83/ApiService.asmx/Send';
 		$string = '';
 		foreach ($post_data as $k => $v)
 		{
-		   $string .="$k=".urlencode($v).'&';
+//		   $string .="$k=".urlencode(utf8_encode($v)).'&';
+           $string .="$k=".urlencode(iconv( "utf-8", "gb2312//IGNORE",$v)).'&';
+//		   $string .="$k=".$v.'&';
 		}
 
-		$post_string = substr($string,0,-1);
+		$post_string = substr($string,0,-1).urlencode(iconv( "utf-8", "gb2312//IGNORE","【".self::$signature."】"));
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -63,6 +78,7 @@ class Hsms
 		curl_setopt($ch, CURLOPT_URL,$url);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_string);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //如果需要将结果直接返回到变量里，那加上这句。
+
 		$result = curl_exec($ch);
 		return self::response($result);
 	}
@@ -74,13 +90,30 @@ class Hsms
 	 */
 	private static function response($result)
 	{
-		if(strpos($result,'<returnstatus>Success</returnstatus>'))
+		/*if(strpos($result,'<returnstatus>Success</returnstatus>'))
 		{
 			return 'success';
 		}
 		else
 		{
 			return 'fail';
-		}
+		}*/
+
+        try{
+            $p = xml_parser_create();
+            xml_parse_into_struct($p, $result, $vals, $index);
+            xml_parser_free($p);
+
+
+            $string = $vals[0]['value'];
+            $string = explode(',', $string);
+            if ($string[0] == 200){
+                return 'success';
+            }else{
+                return 'fail';
+            }
+        }catch (Exception $e){
+            return 'fail';
+        }
 	}
 }
