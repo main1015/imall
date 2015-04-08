@@ -14,6 +14,7 @@ class Seller extends IController
 	 */
 	public function init()
 	{
+        IError::show(404,"您查找的页面已经不存在了");
 		IInterceptor::reg('CheckRights@onCreateAction');
 	}
 	/**

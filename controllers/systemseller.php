@@ -9,6 +9,11 @@ class SystemSeller extends IController
 {
 	public $layout = '';
 
+    public function init()
+    {
+        IError::show(404,"您查找的页面已经不存在了");
+    }
+
 	/**
 	 * @brief 商家登录动作
 	 */
