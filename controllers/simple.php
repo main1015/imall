@@ -19,7 +19,8 @@ class Simple extends IController
 
 	function init()
 	{
-        IError::show(404,"您查找的页面已经不存在了");
+        // todo(myth) 需要屏蔽一部分
+//        IError::show(404,"您查找的页面已经不存在了");
 		CheckRights::checkUserRights();
 	}
 
