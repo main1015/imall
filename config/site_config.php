@@ -11,7 +11,7 @@
   'list_type' => 'win',
   'auto_finish' => '1',
   'index_slide' => 'a:4:{i:0;a:3:{s:4:"name";s:33:"新设计，新内核，新起点";s:3:"url";s:20:"http://www.imall.com";s:3:"img";s:39:"upload/2011/06/07/20110607105300491.png";}i:1;a:3:{s:4:"name";s:18:"开源电子商务";s:3:"url";s:20:"http://www.imall.com";s:3:"img";s:39:"upload/2011/06/07/20110607105300463.png";}i:2;a:3:{s:4:"name";s:27:"自由，易于二次开发";s:3:"url";s:20:"http://www.imall.com";s:3:"img";s:39:"upload/2011/06/07/20110607105300767.png";}i:3;a:3:{s:4:"name";s:21:"电子商务新起点";s:3:"url";s:20:"http://www.imall.com";s:3:"img";s:39:"upload/2011/06/07/20110607105300948.png";}}',
-  'name' => 'iMall开源电子商务平台',
+  'name' => 'iMall电子商务平台',
   'url' => 'http://www.imall.com',
   'master' => '',
   'qq' => '',
