@@ -73,14 +73,14 @@ class taoBaoPacketHelper extends packetHelper
 	}
 }
 /**
- * @brief taobao title to iwebshop cols mapping
+ * @brief taobao title to imall cols mapping
  * @date 2013-9-7 12:22:11
  * @author nswe
  */
 class taoBaoTitleToColsMapping
 {
 	/**
-	 * taobao title to iwebshop cols mapping
+	 * taobao title to imall cols mapping
 	 */
 	public static $mapping = array(
 		'name'       => '宝贝名称',

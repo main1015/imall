@@ -4,7 +4,7 @@ error_reporting(0);
 //安装保护
 if(file_exists(ROOT_PATH.'./install/install.lock'))
 {
-	die('IWebShop is installed, install.loc file is exists');
+	die('IMall is installed, install.loc file is exists');
 }
 
 //转义引号

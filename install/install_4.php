@@ -1,6 +1,6 @@
 <?php
 //生成lock文件
-$is_success = file_put_contents(ROOT_PATH.'./install/install.lock','iwebshop');
+$is_success = file_put_contents(ROOT_PATH.'./install/install.lock','imall');
 if(!$is_success)
 {
 	die('create install.lock file fail');

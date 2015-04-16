@@ -11,12 +11,12 @@
     注意：确保 AllowOverride 为 All
     重启服务即可。
 
-	简单的测试方法：直接在你iwebshop主域名后追加 /simple/cart ,看能否正确进入购物车页面,如网站: http://shop.jooyea.cn/simple/cart ，
+	简单的测试方法：直接在你imall主域名后追加 /simple/cart ,看能否正确进入购物车页面,如网站: http://shop.imall.cn/simple/cart ，
 	如果通过了上面的测试那么恭喜你，你的服务器环境可以支持更个性化，更美观，更利于seo收录的url访问方式了。
 
-	如果之前的测试依然没有成功那么你的服务器环境就仅能使用原生态的 url方式了，千万不要强制开启iwebshop的 伪静态设置,否则整站将无法访问！
+	如果之前的测试依然没有成功那么你的服务器环境就仅能使用原生态的 url方式了，千万不要强制开启imall的 伪静态设置,否则整站将无法访问！
 
-	2,设置iwebshop的url访问方式为pathinfo格式(以"/"分割各个参数的路径格式)。
+	2,设置imall的url访问方式为pathinfo格式(以"/"分割各个参数的路径格式)。
 	这里提供2种修改方法：
 		1，登录后台进入 <网站设置> 页面，点选 <系统设置> 选项卡，修改最后一项 <伪静态> 选择开启即可;
 		2, 打开程序根目录下的 config/config.php 文件,把 rewriteRule 这项的参数修改为 pathinfo 即可,像这样：'rewriteRule' => 'pathinfo'
@@ -34,7 +34,7 @@
 	路由中的 <id:\d> 是对于路径中动态参数的一种引用，并且数据带有正则校验性质。
 	上面所举例的路由规则表述为：所有 goods_<id:\d+>.html 格式的url,且存在数据类型为数字的 id 参数，都由 site/products 来执行处理，并且页面中原来为 site/products 的地址都被
 	自动改写成了 goods_<id:\d+>.html 这种格式。
-	在iwebshop中 "site/products/id/商品ID" 这个路径是商品详情页面的地址,设置了此路由后所有商品详情页面都会以静态页面的url形式进行展现。
+	在imall中 "site/products/id/商品ID" 这个路径是商品详情页面的地址,设置了此路由后所有商品详情页面都会以静态页面的url形式进行展现。
 
 	下面介绍一些实用的路由规则：
 	'<action:.*>'      => 'site/<action>'            让前台所有site控制器的url直接变成动作名称

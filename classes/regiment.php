@@ -3,7 +3,7 @@
  * 与团购相关的操作
  *
  * @author walu
- * @package iwebshop
+ * @package imall
  */
 
 class Regiment

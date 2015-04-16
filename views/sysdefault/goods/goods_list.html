@@ -10,7 +10,6 @@
 				<select class="auto" name="search[name]">
 					<option value="go.name">商品名</option>
 					<option value="go.goods_no">商品货号</option>
-					<option value="seller.true_name">商户真实名称</option>
 				</select>
 				<input class="small" name="search[keywords]" type="text" value="" />
 				<button class="btn" type="submit"><span class="sch">搜 索</span></button>
@@ -35,7 +34,6 @@
 			<select class="auto" name="search[seller_id]">
 				<option value="">选择商品所属</option>
 				<option value="=0">平台商品</option>
-				<option value="!=0">商户商品</option>
 			</select>
 			<select class="auto" name="search[category_id]">
 				<option value="">选择分类</option>
@@ -47,7 +45,6 @@
 				<option value="">选择上下架</option>
 				<option value="0">上架</option>
 				<option value="2">下架</option>
-				<option value="3">待审</option>
 			</select>
 			<select class="auto" name="search[store_nums]">
 				<option value="">选择库存</option>
@@ -129,7 +126,6 @@
 						<select onchange="changeIsDel({$item['id']},this)">
 							<option value="up" {echo:$item['is_del']==0 ? 'selected':''}>上架</option>
 							<option value="down" {echo:$item['is_del']==2 ? 'selected':''}>下架</option>
-							<option value="check" {echo:$item['is_del']==3 ? 'selected':''}>待审</option>
 						</select>
 					</td>
 					<td><input type="text" class="tiny" value="{$item['sort']}" onchange="changeSort({$item['id']},this);" /></td>

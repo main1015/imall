@@ -5,7 +5,7 @@
 class Update extends IController
 {
 	/**
-	 * @brief iwebshop15011000 版本升级更新
+	 * @brief imall15011000 版本升级更新
 	 */
 	public function iwebshop15011000()
 	{

@@ -10,7 +10,7 @@
 class seo
 {
 	/**
-	 * 在view里为iwebshop页面调整title、keywords、description
+	 * 在view里为imall页面调整title、keywords、description
 	 * @param array $config array('title'=>'','keywords'=>'','description'=>'')
 	 */
 	public static function set($config)

@@ -22,7 +22,7 @@ class DBBackup
 	private $totalSize    = 0;                 //备份数据共占字节数
 	private $showMess     = false;             //展示状态信息
 	private $dir          = 'backup/database'; //备份路径
-	private $fPrefix      = 'iwebshop';        //备份文件名前缀
+	private $fPrefix      = 'imall';        //备份文件名前缀
 	private $fExtend      = '.sql';            //备份文件扩展名
 
 	//构造函数

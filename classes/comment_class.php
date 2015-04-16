@@ -3,7 +3,7 @@
  * 与评论相关的
  *
  * @author walu
- * @packge iwebshop
+ * @packge imall
  */
 
 class Comment_Class

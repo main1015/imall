@@ -2,7 +2,7 @@
 /**
  * 关于系统帮助
  * @author walu
- * @package iwebshop
+ * @package imall
  */
 
 class SiteHelp
