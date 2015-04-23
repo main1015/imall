@@ -1,0 +1,185 @@
+{set:
+	$site_config=new Config('site_config');
+	$seo_data=array();
+	$seo_data['title']=$site_config->name;
+	$seo_data['title'].=$site_config->index_seo_title;
+	$seo_data['keywords']=$site_config->index_seo_keywords;
+	$seo_data['description']=$site_config->index_seo_description;
+	seo::set($seo_data);
+}
+
+<style>
+    #categorys-2013 .mc {
+        display: block;
+    }
+    #categorys-2013 .mt b {
+        display: none;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="{theme:javascript/jquery.bxSlider/jquery.bxslider.css}" />
+<script type="text/javascript" src="{theme:javascript/jquery.bxSlider/jquery.bxSlider.min.js}"></script>
+
+<div class="w">
+    <!--o-slide-->
+    <div id="o-slide">
+        <!--幻灯片 开始-->
+        <div class="slide">
+            {if:$this->index_slide}
+            <ul class="bxslider">
+                {foreach:items=$this->index_slide}
+                <li title="{$item['name']}"><a href="{url:$item[url]}" target="_blank"><img src="{webroot:$item[img]}" width="750px" title="{$item['name']}" width="670px" height="240px" /></a></li>
+                {/foreach}
+            </ul>
+            {/if}
+        </div>
+        <!--幻灯片 开始-->
+
+        <div class="jscroll">
+            {echo:Ad::show(13)}
+            {echo:Ad::show(12)}
+            {echo:Ad::show(11)}
+        </div>
+    </div>
+    <!--o-slide-->
+
+    <div id="jdnews" class="m m1">
+        {echo:Ad::show(14)}
+        <!--公告通知-->
+        <div class="mt">
+            <h2>网站公告</h2>
+            <div class="extra"><a class="more" href="{url:/site/notice}">更多公告&nbsp;&gt;</a></div>
+        </div>
+
+        <div class="mc">
+            <ul>
+                {foreach:items=Api::run('getAnnouncementList',10)}
+                {set:$tmpId=$item['id'];}
+                <li class><a href="{url:/site/notice_detail/id/$tmpId}">{$item['title']}</a></li>
+                {/foreach}
+            </ul>
+        </div>
+        <!--公告通知-->
+        {echo:Ad::show(7)}
+    </div>
+
+</div>
+<div class="clear"></div>
+
+
+<!--floors-list-->
+{foreach:items=Api::run('getCategoryListTop')  item=$first key=$i}
+{set:$_i=$i + 1}
+<div id="floors-list" class="mt20">
+    <div class="w w1">
+        <!--catalogue-->
+        <div class="catalogue m m1 ">
+            <div class="mt ld">
+                <div class="floor">
+                    <b class="fixpng b b1"></b><b class="fixpng b b2" style="height: 34px; display: block;"></b>
+                    <b class="b b3">{$_i}F</b><b class="fixpng b4"></b></div>
+                <h2 style="font-size:22px;">{$first['name']}</h2>
+            </div>
+            <div class="mc">
+                <div class="style1">
+                    <ul class="lh">
+                        {foreach:items=Api::run('getCategoryByParentid',array('#parent_id#',$first['id'])) item=$second}
+                        <li><a href="{url:/site/pro_list/cat/$second[id]}">{$second['name']}</a></li>
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--catalogue-->
+        <!--m plist-->
+        <div class="m plist">
+            <div class="hl_p_menu">
+                {foreach:items=Api::run('getCategoryByParentid', array('#parent_id#',$first['id']), 5) key=$m item=$second}
+                <a href="javascript:void(0);" class="{if:$m == 0}cur{/if}">{$second['name']}<div class="tab-arrow" style="left: 0px;"><b></b></div>
+                </a>
+                {/foreach}
+                <div class="extra">
+                    <a href="{url:/site/pro_list/cat/$first[id]}" target="_blank">更多&gt;&gt;</a>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="hlsmc">
+
+                {foreach:items=Api::run('getCategoryByParentid', array('#parent_id#',$first['id']), 5) key=$c item=$second}
+                <ul class="lh style3" style="display: {if:$c == 0}block{else:}none{/if} ;">
+                    {foreach:items=Api::run('getCategoryExtendList',array('#categroy_id#',$second['id']),6) key=$j item=$item}
+                    {set:$_j=$j + 1}
+                    <li class="fore{$_j}">
+                        <div class="p-img ld"><a target="_blank" href="{url:/site/products/id/$item[id]}" title="{$item['name']}"><img src="{url:/pic/thumb/img/$item[img]/w/100/h/100}" width="100" height="100" alt="{$item['name']}" title="{$item['name']}" /></a></div>
+                        <div class="p-name">
+                            <a target="_blank" href="{url:/site/products/id/$item[id]}" title="{$item['name']}">{$item['name']}</a>
+                        </div>
+                        <div class="p-price"><span>￥</span>{$item['sell_price']}</div>
+                    </li>
+                    {/foreach}
+                </ul>
+                {/foreach}
+            </div>
+        </div>
+        <!--m plist-->
+    </div>
+</div>
+<div class="clear"></div>
+{/foreach}
+<!--floors-list-->
+
+
+<script type='text/javascript'>
+//dom载入完毕执行
+jQuery(function()
+{
+    //幻灯片开启
+    $('.bxslider').bxSlider({'mode':'fade','captions':false,'controls':false,'pager':true,'auto':true});
+
+
+    $(".hl_p_menu a").hover(function(){
+        $(this).addClass('cur').siblings().removeClass('cur');
+        var p= $(this).index();
+        $(this).parent().parent().children(".hlsmc").children("ul").eq(p).show().siblings().hide();
+
+    });
+
+    //email订阅 事件绑定
+
+	//显示抢购倒计时
+	var cd_timer = new countdown();
+	{if:isset($countNumsItem) && $countNumsItem}
+	{foreach:items = $countNumsItem}
+		cd_timer.add({$item});
+	{/foreach}
+	{/if}
+
+	//首页商品变色
+	var colorArray = ['green','yellow','purple'];
+	$('div[name="showGoods"]').each(function(i)
+	{
+		$(this).addClass(colorArray[i%colorArray.length]);
+	});
+});
+
+//电子邮件订阅
+function orderinfo()
+{
+	var email = $('[name="orderinfo"]').val();
+	if(email == '')
+	{
+		alert('请填写正确的email地址');
+	}
+	else
+	{
+		$.getJSON('{url:/site/email_registry}',{email:email},function(content){
+			if(content.isError == false)
+			{
+				alert('订阅成功');
+				$('[name="orderinfo"]').val('');
+			}
+			else
+				alert(content.message);
+		});
+	}
+}
+</script>

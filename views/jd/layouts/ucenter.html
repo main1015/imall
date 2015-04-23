@@ -1,0 +1,385 @@
+{set:
+	$myCartObj  = new Cart();
+	$myCartInfo = $myCartObj->getMyCart();
+	$siteConfig = new Config("site_config");
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{echo:$siteConfig->name}</title>
+    <link rel="stylesheet" href="{skin:css/css.css}" />
+    <link rel="stylesheet" href="{skin:css/hl.css}" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	{js:jquery}
+	{js:form}
+	{js:dialog}
+	{js:validate}
+	{js:artTemplate}
+	<script type='text/javascript' src="{theme:javascript/common.js}"></script>
+	<script type='text/javascript' src='{theme:javascript/site.js}'></script>
+	<script type='text/javascript'>
+		//用户中心导航条
+		function menu_current()
+		{
+		    var current = "{echo:$this->getAction()->getId()}";
+		    if(current == 'consult_old') current='consult';
+		    else if(current == 'isevaluation') current ='evaluation';
+		    else if(current == 'withdraw') current = 'account_log';
+		    var tmpUrl = "{url:/ucenter/current}";
+		    tmpUrl = tmpUrl.replace("current",current);
+		    $('div.cont ul.list li a[href^="'+tmpUrl+'"]').parent().addClass("current");
+		}
+	</script>
+    <style>
+        #categorys-2013 .mt b {
+            display: none;
+        }
+    </style>
+
+    <script type='text/javascript'>
+        jQuery(function()
+        {
+            $("#nav-2013 .categorys-2014").hover(function(){
+                $(this).addClass("hover");
+            },function(){
+                $(this).removeClass("hover");
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="ucenter container">
+    <!--shortcut-2013-->
+    <div id="shortcut-2013">
+        <div class="w">
+            <ul class="fl lh">
+                <li class="fore1" id="loginbar">
+                    {if:$this->user}
+                    <span>{echo:$this->user['username']}您好，欢迎您来到{echo:$siteConfig->name}购物！[<a href="{url:/ucenter/index}">个人中心</a>][<a href="{url:/simple/logout}" class="reg">安全退出</a>]</span>
+                    {else:}
+                            <span>您好，欢迎您来到{echo:$siteConfig->name}购物！
+                            [<a href="{url:/simple/login?callback=$callback}">登录</a>][<a class="link-regist" href="{url:/simple/reg?callback=$callback}">免费注册</a>]</span>
+                    {/if}
+                </li>
+            </ul>
+            <ul class="fr lh">
+                <li class="fore2 ld">
+                    <s></s>
+                    <a href="{url:/ucenter/index}">我的账户</a>
+                </li>
+                <li class="fore2 ld">
+                    <s></s>
+                    <a href="{url:/ucenter/order}">我的订单</a>
+                </li>
+                <li class="fore2 ld">
+                    <s></s>
+                    <a href="{url:/site/help_list}">使用帮助</a>
+                </li>
+            </ul>
+            <span class="clr"></span>
+        </div>
+    </div>
+    <!--shortcut-2013-->
+
+    <!--o-header-2013-->
+    <div class="o-header-2013">
+        <!--header-2013-->
+        <div id="header-2013" class="w">
+            <!--logo-2013-->
+            <div id="logo-2013" class="ld">
+                <a href="{url:/site/index}"><b></b>
+                    <img src="{skin:images/front/logo.png}" width="270" height="60">
+                </a>
+            </div>
+            <!--logo-2013-->
+            <!--search-2013-->
+            <div id="search-2013">
+                <div class="i-search ld">
+                    <div class="form">
+                        <form method="get" action="{url:/}">
+                            <input type="hidden" name="controller" value="site">
+                            <input type="hidden" name="action" value="search_list">
+                            <input type="text" class="text" name="word" value="输入关键字..." autocomplete="off">
+                            <input type="submit" value="搜索" class="button" onclick="checkInput('word','输入关键字...');">
+                        </form>
+                    </div>
+                </div>
+                <div id="hotwords" clstag="homepage|keycount|home2013|03b"><strong>热门搜索：</strong>
+                    {foreach:items=Api::run('getKeywordList') }
+                    {set:$tmpWord = urlencode($item['word']);}
+                    <a href="{url:/site/search_list/word/$tmpWord}">{$item['word']}</a>
+                    {/foreach}
+                </div>
+            </div>
+            <!--search-2013-->
+
+            <!--my360buy-2013-->
+            <div id="my360buy-2013">
+                <dl class="" load="1">
+                    <dt class="ld"><s></s><a href="{url:/site/index}">用户中心</a><b></b></dt>
+                    <dd>
+                        {if:$this->user}
+                        <div class="uclist">
+                            <ul class="fore1 fl">
+                                <li><a href="{url:/ucenter/order}">我的订单</a></li>
+                                <li><a href="{url:/ucenter/redpacket}">我的代金券</a></li>
+                                <li><a href="{url:/ucenter/complain}">站点见意</a></li>
+                                <li><a href="{url:/ucenter/account_log}">账户余额</a></li>
+                            </ul>
+                            <ul class="fore2 fl">
+                                <li><a href="{url:/ucenter/integral}">我的积分</a></li>
+                                <li><a href="{url:/ucenter/favorite}">我的收藏</a></li>
+                                <li><a href="{url:/ucenter/message}">我的消息</a></li>
+                                <li><a href="{url:/ucenter/info}">个人资料</a></li>
+                            </ul>
+                        </div>
+                        {else:}
+                        <div class="prompt">
+                                    <span class="fl">
+                                        您好，请<a href="{url:/simple/login?callback=$callback}">登录</a>
+                                    </span>
+                            <span class="fr"></span>
+                        </div>
+                        {/if}
+                    </dd>
+                </dl>
+            </div>
+            <!--my360buy-2013-->
+            <!--settleup-2013-->
+            <div id="settleup-2013">
+                <dl class="">
+                    <dt class="ld"><s></s>
+                            <span class="shopping">
+                                <span id="shopping-amount" name="mycart_count">{$myCartInfo['count']}</span>
+                            </span>
+                        <a href="{url:/simple/cart}" id="settleup-url">去购物车结算</a> <b></b>
+                    </dt>
+                    <dd id="div_mycart">
+
+                    </dd>
+                </dl>
+            </div>
+            <!--settleup-2013-->
+
+            <!--购物车模板 开始-->
+            <script type="text/html" id="cartTemplete">
+                <%for(var item in goodsData){%>
+                <%var data = goodsData[item]%>
+                <ul id="site_cart_dd_<%=item%>">
+                    <li>
+                        <div class="p-img fl">
+                            <a href="{url:/site/products/id/<%=data['goods_id']%>}" target="_blank">
+                                <img src="/<%=data['img']%>" width="50" height="50" alt=""></a>
+                        </div>
+                        <div class="p-name fl">
+                            <span>
+                            </span><a href="{url:/site/products/id/<%=data['goods_id']%>}" title="<%=data['name']%>" target="_blank">
+                            <%=data['name']%>
+                        </a>
+                        </div>
+                        <div class="p-detail fr ar">
+                            <span class="p-price"><strong>￥<%=data['sell_price']%></strong>×<%=data['count']%></span><br>
+                            <a class="delete" onclick="removeCart('{url:/simple/removeCart}','<%=data['id']%>','<%=data['type']%>');$('#site_cart_dd_<%=item%>').hide('slow');" href="javascript:void(0);">删除</a>
+                        </div>
+                    </li>
+                </ul>
+                <%}%>
+                <%if(data){%>
+                <div class="smb ar">共<b name="mycart_count"><%=goodsCount%></b>件商品　共计<strong name="mycart_sum">￥<%=goodsSum%></strong><br>
+                    <a href="{url:/simple/cart}" title="去购物车结算" id="btn-payforgoods">去购物车结算</a></div>
+                <%}else{%>
+
+                <div class="prompt">
+                    <div class="nogoods"><b></b>购物车中还没有商品，赶紧选购吧！</div>
+                </div>
+                <%}%>
+            </script>
+            <!--购物车模板 结束-->
+        </div>
+        <!--header-2013-->
+
+        <div class="w">
+            <div id="nav-2013">
+                <div id="categorys-2013" class="categorys-2014">
+                    <div class="mt ld">
+                        <h2><a href="{url:/site/sitemap}" clstag="homepage|keycount|home2013|06a">全部商品分类<b></b></a></h2>
+                    </div>
+
+                    <div id="_JD_ALLSORT" class="mc">
+                        {foreach:items=Api::run('getCategoryListTop')  item=$first }
+                        <div class="item fore1">
+                                <span>
+                                    <h3><a href="{url:/site/pro_list/cat/$first[id]}">{$first['name']}</a></h3><s></s>
+                                </span>
+                            <div class="i-mc" style="top: 3px;">
+                                <div class="subitem">
+                                    {foreach:items=Api::run('getCategoryByParentid',array('#parent_id#',$first['id']))  item=$second}
+                                    <dl class="fore1">
+                                        <dt>
+                                            <a href="{url:/site/pro_list/cat/$second[id]}">{$second['name']}</a>
+                                        </dt>
+                                        <dd>
+                                            {foreach:items=Api::run('getCategoryByParentid',array('#parent_id#',$second['id']))  item=$third}
+                                            <em><a href="{url:/site/pro_list/cat/$third[id]}">{$third['name']}</a></em>
+                                            {/foreach}
+                                        </dd>
+                                    </dl>
+                                    {/foreach}
+
+                                </div>
+                            </div>
+                        </div>
+                        {/foreach}
+                    </div>
+                </div>
+                <ul id="navitems-2013">
+                    <li class="curr hover"><a href="{url:/site/index}">首页</a></li>
+                    {foreach:items=Api::run('getGuideList')}
+                    <li><a href="{url:$item[link]}">{$item['name']}<span> </span></a></li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--o-header-2013-->
+
+	<div class="position">
+		您当前的位置： <a href="{url:}">首页</a> » <a href="{url:/ucenter/index}">我的账户</a>
+	</div>
+	<div class="wrapper clearfix">
+		<div class="sidebar f_l">
+			<div class="box">
+				<div class="title"><h2>交易记录</h2></div>
+				<div class="cont">
+					<ul class="list">
+						<li><a href="{url:/ucenter/order}">我的订单</a></li>
+						<li><a href="{url:/ucenter/integral}">我的积分</a></li>
+						<li><a href="{url:/ucenter/redpacket}">我的代金券</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="box">
+				<div class="title"><h2 class='bg2'>服务中心</h2></div>
+				<div class="cont">
+					<ul class="list">
+						<li><a href="{url:/ucenter/refunds}">退款申请</a></li>
+						<li><a href="{url:/ucenter/complain}">站点建议</a></li>
+						<li><a href="{url:/ucenter/consult}">商品咨询</a></li>
+						<li><a href="{url:/ucenter/evaluation}">商品评价</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="box">
+				<div class="title"><h2 class='bg3'>应用</h2></div>
+				<div class="cont">
+					<ul class="list">
+						<li><a href="{url:/ucenter/message}">短信息</a></li>
+						<li><a href="{url:/ucenter/favorite}">收藏夹</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="box">
+				<div class="title"><h2 class='bg5'>个人设置</h2></div>
+				<div class="cont">
+					<ul class="list">
+						<li><a href="{url:/ucenter/address}">地址管理</a></li>
+						<li><a href="{url:/ucenter/info}">个人资料</a></li>
+						<li><a href="{url:/ucenter/password}">修改密码</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		{viewcontent}
+	</div>
+
+    <div class="w">
+        <div id="service-2013">
+            {foreach:items=Api::run('getHelpCategoryFoot') item=$helpCat}
+            <dl>
+                <dt><a href="{url:/site/help_list/id/$helpCat[id]}">{$helpCat['name']}</a></dt>
+                <dd>
+                    {foreach:items=Api::run('getHelpListByCatidAll',array('#cat_id#',$helpCat['id']))}
+                    <div><a href="{url:/site/help/id/$item[id]}">{$item['name']}</a></div>
+                    {/foreach}
+                </dd>
+            </dl>
+            {/foreach}
+            <div class="clear"></div>
+
+        </div>
+    </div>
+    <div class="w">
+        <div id="footer-2013">
+            {echo:IFilter::stripSlash($siteConfig->site_footer_code)}
+        </div>
+    </div>
+</div>
+<script type='text/javascript'>
+//DOM加载完毕后运行
+$(function()
+{
+	$(".tabs").each(function(i){
+	    var parrent = $(this);
+		$('.tabs_menu .node',this).each(function(j){
+			var current=".node:eq("+j+")";
+			$(this).bind('click',function(event){
+				$('.tabs_menu .node',parrent).removeClass('current');
+				$(this).addClass('current');
+				$('.tabs_content>.node',parrent).css('display','none');
+				$('.tabs_content>.node:eq('+j+')',parrent).css('display','block');
+			});
+		});
+	});
+
+    $("#_JD_ALLSORT .item").hover(function(){
+        $(this).addClass("hover");
+    },function(){
+        $(this).removeClass("hover");
+    });
+
+
+    $("#my360buy-2013 dl").hover(function(){
+        $(this).addClass("hover");
+    },function(){
+        $(this).removeClass("hover");
+    });
+
+	//隔行换色
+	$(".list_table tr:nth-child(even)").addClass('even');
+	$(".list_table tr").hover(
+		function () {
+			$(this).addClass("sel");
+		},
+		function () {
+			$(this).removeClass("sel");
+		}
+	);
+
+	menu_current();
+
+	$('input:text[name="word"]').bind({
+		keyup:function(){autoComplete('{url:/site/autoComplete}','{url:/site/search_list/word/@word@}','{$siteConfig->auto_finish}');}
+	});
+
+	{set:$word = IReq::get('word') ? IFilter::act(IReq::get('word'),'text') : '输入关键字...'}
+	$('input:text[name="word"]').val("{$word}");
+
+	//购物车div层
+    $('#settleup-2013 dl').hover(
+            function(){
+                $(this).addClass("hover");
+                showCart('{url:/simple/showCart}');
+            },
+            function(){
+                $(this).removeClass("hover");
+                $('#div_mycart').hide();
+            }
+    );
+
+});
+</script>
+</body>
+</html>

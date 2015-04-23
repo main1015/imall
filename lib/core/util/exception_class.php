@@ -162,7 +162,7 @@ class IException extends Exception
 		if(is_array($errcontext))
 		{
 			$re .= "##出错时变量的值：##\n";
-			$re .= var_export($errcontext,true)."\n";
+//			$re .= var_export($errcontext,true)."\n";
 		}
 		$re .= "<\ERROR_INFO>\n";
 

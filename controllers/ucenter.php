@@ -703,12 +703,20 @@ class Ucenter extends IController
     //[余额交易记录]
     function account_log()
     {
+        //todo(myth)不支持
+        IError::show(404,"您查找的页面已经不存在了");
     	$user_id   = $this->user['user_id'];
 
     	$memberObj = new IModel('member','balance');
     	$where     = 'user_id = '.$user_id;
     	$this->memberRow = $memberObj->getObj($where);
     	$this->redirect('account_log');
+    }
+    //[在线充值]
+    function online_recharge()
+    {
+        //todo(myth)不支持
+        IError::show(404,"您查找的页面已经不存在了");
     }
 
     //[收藏夹]备注信息
