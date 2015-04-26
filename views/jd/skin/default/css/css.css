@@ -891,6 +891,7 @@ em {
     float: right;
 }
 .hl_p_menu .extra a {
+    width: 130px;
     color: #005EA7;
 }
 
