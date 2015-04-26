@@ -2185,8 +2185,8 @@ dl.sorting dd.swith a.down{
 }
 .display_title ul li a span{
     margin:0 4px;
-    padding:0 3px 0 0;
-    padding:0 4px 0 09;
+    padding:0 8px 0 0;
+    padding:0 9px 0 09;
     background:url(../images/front/sprites_2.gif) -25px -180px no-repeat
 }
 .display_title ul li.current a span{
