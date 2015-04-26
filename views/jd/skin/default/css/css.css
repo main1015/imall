@@ -744,7 +744,7 @@ em {
 }
 #jdnews li {
     float: left;
-    width: 133px;
+    width: 100%;
     height: 25px;
     padding: 0 10px;
     line-height: 25px;
@@ -875,14 +875,14 @@ em {
 .plist {
     position: relative;
     float: left;
-    width: 980px;
+    width: 770px;
     margin-bottom: 0;
 }
 
 .hl_p_menu{
     height: 30px;
     line-height: 30px;
-    width: 980px;
+    width: 770px;
     border-bottom: 2px solid #AAA;
     float:left;
 }
@@ -937,11 +937,11 @@ em {
     padding-top:1px;
 }
 .plist .hlsmc ul.lh {
-    width: 981px;
+    width: 770px;
 }
 .plist .hlsmc .style3 li {
     width: 137px;
-    padding: 5px 10px 0;
+    padding: 5px 8px 0;
     border-left: 1px solid #F1F1F1;
     border-top: 1px solid #F1F1F1;
     overflow: hidden;

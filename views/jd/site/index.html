@@ -52,7 +52,7 @@
 
         <div class="mc">
             <ul>
-                {foreach:items=Api::run('getAnnouncementList',10)}
+                {foreach:items=Api::run('getAnnouncementList',5)}
                 {set:$tmpId=$item['id'];}
                 <li class><a href="{url:/site/notice_detail/id/$tmpId}">{$item['title']}</a></li>
                 {/foreach}
@@ -66,66 +66,157 @@
 <div class="clear"></div>
 
 
-<!--floors-list-->
-{foreach:items=Api::run('getCategoryListTop')  item=$first key=$i}
-{set:$_i=$i + 1}
-<div id="floors-list" class="mt20">
-    <div class="w w1">
-        <!--catalogue-->
-        <div class="catalogue m m1 ">
-            <div class="mt ld">
-                <div class="floor">
-                    <b class="fixpng b b1"></b><b class="fixpng b b2" style="height: 34px; display: block;"></b>
-                    <b class="b b3">{$_i}F</b><b class="fixpng b4"></b></div>
-                <h2 style="font-size:22px;">{$first['name']}</h2>
-            </div>
-            <div class="mc">
-                <div class="style1">
-                    <ul class="lh">
-                        {foreach:items=Api::run('getCategoryByParentid',array('#parent_id#',$first['id'])) item=$second}
-                        <li><a href="{url:/site/pro_list/cat/$second[id]}">{$second['name']}</a></li>
-                        {/foreach}
-                    </ul>
-                </div>
+<div class="wrapper clearfix">
+    <div class="sidebar f_r mt20">
+
+        <!--团购-->
+        <div class="group_on box m_10">
+            <div class="title"><h2>团购商品</h2><a class="more" href="{url:/site/groupon}">更多...</a></div>
+            <div class="cont">
+                <ul class="ranklist">
+
+                    {foreach:items=Api::run('getRegimentList',5)}
+                    <li class="current">
+                        {set:$tmpId=$item['id'];}
+                        <a href="{url:/site/groupon/id/$tmpId}"><img width="60px" height="60px" alt="{$item['title']}" src="{webroot:$item[img]}"></a>
+                        <a class="p_name" title="{$item['title']}" href="{url:/site/groupon/id/$tmpId}">{$item['title']}</a><p class="light_gray">团购价：<em>￥{$item['regiment_price']}</em></p>
+                    </li>
+                    {/foreach}
+
+                </ul>
             </div>
         </div>
-        <!--catalogue-->
-        <!--m plist-->
-        <div class="m plist">
-            <div class="hl_p_menu">
-                {foreach:items=Api::run('getCategoryByParentid', array('#parent_id#',$first['id']), 5) key=$m item=$second}
-                <a href="javascript:void(0);" class="{if:$m == 0}cur{/if}">{$second['name']}<div class="tab-arrow" style="left: 0px;"><b></b></div>
-                </a>
-                {/foreach}
-                <div class="extra">
-                    <a href="{url:/site/pro_list/cat/$first[id]}" target="_blank">更多&gt;&gt;</a>
-                </div>
-            </div>
-            <div class="clear"></div>
-            <div class="hlsmc">
+        <!--团购-->
 
-                {foreach:items=Api::run('getCategoryByParentid', array('#parent_id#',$first['id']), 5) key=$c item=$second}
-                <ul class="lh style3" style="display: {if:$c == 0}block{else:}none{/if} ;">
-                    {foreach:items=Api::run('getCategoryExtendList',array('#categroy_id#',$second['id']),6) key=$j item=$item}
-                    {set:$_j=$j + 1}
-                    <li class="fore{$_j}">
-                        <div class="p-img ld"><a target="_blank" href="{url:/site/products/id/$item[id]}" title="{$item['name']}"><img src="{url:/pic/thumb/img/$item[img]/w/100/h/100}" width="100" height="100" alt="{$item['name']}" title="{$item['name']}" /></a></div>
-                        <div class="p-name">
-                            <a target="_blank" href="{url:/site/products/id/$item[id]}" title="{$item['name']}">{$item['name']}</a>
-                        </div>
-                        <div class="p-price"><span>￥</span>{$item['sell_price']}</div>
+        <!--限时抢购-->
+        <div class="buying box m_10">
+            <div class="title"><h2>限时抢购</h2></div>
+            <div class="cont clearfix">
+                <ul class="prolist">
+                    {foreach:items=Api::run('getPromotionList',5)}
+                    {set:$free_time = ITime::getDiffSec($item['end_time'])}
+                    {set:$countNumsItem[] = $item['p_id'];}
+                    <li>
+                        <p class="countdown">倒计时:<br /><b id='cd_hour_{$item['p_id']}'>{echo:floor($free_time/3600);}</b>时<b id='cd_minute_{$item['p_id']}'>{echo:floor(($free_time%3600)/60);}</b>分<b id='cd_second_{$item['p_id']}'>{echo:$free_time%60;}</b>秒</p>
+                        {set:$tmpGoodsId=$item['goods_id'];$tmpPId=$item['p_id'];}
+                        <a href="{url:/site/products/id/$tmpGoodsId/promo/time/active_id/$tmpPId}"><img src="{url:/pic/thumb/img/$item[img]/w/175/h/175}" width="175" height="175" alt="{$item['name']}" title="{$item['name']}" /></a>
+                        <p class="pro_title"><a href="{url:/site/products/id/$tmpGoodsId/promo/time/active_id/$tmpPId}">{$item['name']}</a></p>
+                        <p class="light_gray">抢购价：<b>￥{$item['award_value']}</b></p>
+                        <div></div>
                     </li>
                     {/foreach}
                 </ul>
+            </div>
+        </div>
+        <!--限时抢购-->
+
+        <!--热卖商品-->
+        <div class="hot box m_10">
+            <div class="title"><h2>热卖商品</h2></div>
+            <div class="cont clearfix">
+                <ul class="prolist">
+                    {foreach:items=Api::run('getCommendHot',8)}
+                    {set:$tmpId=$item['id']}
+                    <li>
+                        <a href="{url:/site/products/id/$tmpId}"><img src="{url:/pic/thumb/img/$item[img]/w/85/h/85}" width="85" height="85" alt="{$item['name']}" /></a>
+                        <p class="pro_title"><a href="{url:/site/products/id/$tmpId}">{$item['name']}</a></p>
+                        <p class="brown"><b>￥{$item['sell_price']}</b></p>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        <!--热卖商品-->
+
+        <!--促销规则-->
+        <div class="box m_10">
+            <div class="title"><h2>促销活动</h2></div>
+            <div class="cont">
+                <ul class="list">
+                    {foreach:items=Api::run('getProrule')}
+                    <li>{$item['info']}</li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        <!--促销规则-->
+
+        <!--关键词-->
+        <div class="box m_10">
+            <div class="title"><h2>关键词</h2><a class="more" href="{url:/site/tags}">更多...</a></div>
+            <div class="tag cont t_l">
+                {foreach:items=Api::run('getKeywordList',5)}
+                {set:$searchWord =urlencode($item['word']);}
+                <a href="{url:/site/search_list/word/$searchWord}" class="orange">{$item['word']}</a>
                 {/foreach}
             </div>
         </div>
-        <!--m plist-->
+        <!--关键词-->
     </div>
+
+    <!--floors-list-->
+    {foreach:items=Api::run('getCategoryListTop')  item=$first key=$i}
+    {set:$_i=$i + 1}
+    <div id="floors-list" class="mt20 f_l" style="width: 980px">
+        <div class="w w1">
+            <!--catalogue-->
+            <div class="catalogue m m1 ">
+                <div class="mt ld">
+                    <div class="floor">
+                        <b class="fixpng b b1"></b><b class="fixpng b b2" style="height: 34px; display: block;"></b>
+                        <b class="b b3">{$_i}F</b><b class="fixpng b4"></b></div>
+                    <h2 style="font-size:22px;">{$first['name']}</h2>
+                </div>
+                <div class="mc">
+                    <div class="style1">
+                        <ul class="lh">
+                            {foreach:items=Api::run('getCategoryByParentid',array('#parent_id#',$first['id'])) item=$second}
+                            <li><a href="{url:/site/pro_list/cat/$second[id]}">{$second['name']}</a></li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--catalogue-->
+            <!--m plist-->
+            <div class="m plist">
+                <div class="hl_p_menu">
+                    {foreach:items=Api::run('getCategoryByParentid', array('#parent_id#',$first['id']), 4) key=$m item=$second}
+                    <a href="javascript:void(0);" class="{if:$m == 0}cur{/if}">{$second['name']}<div class="tab-arrow" style="left: 0px;"><b></b></div>
+                    </a>
+                    {/foreach}
+                    <div class="extra">
+                        <a href="{url:/site/pro_list/cat/$first[id]}" target="_blank">更多&gt;&gt;</a>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="hlsmc">
+
+                    {foreach:items=Api::run('getCategoryByParentid', array('#parent_id#',$first['id']), 4) key=$c item=$second}
+                    <ul class="lh style3" style="display: {if:$c == 0}block{else:}none{/if} ;">
+                        {foreach:items=Api::run('getCategoryExtendList',array('#categroy_id#',$second['id']),5) key=$j item=$item}
+                        {set:$_j=$j + 1}
+                        <li class="fore{$_j}">
+                            <div class="p-img ld"><a target="_blank" href="{url:/site/products/id/$item[id]}" title="{$item['name']}"><img src="{url:/pic/thumb/img/$item[img]/w/100/h/100}" width="100" height="100" alt="{$item['name']}" title="{$item['name']}" /></a></div>
+                            <div class="p-name">
+                                <a target="_blank" href="{url:/site/products/id/$item[id]}" title="{$item['name']}">{$item['name']}</a>
+                            </div>
+                            <div class="p-price"><span>￥</span>{$item['sell_price']}</div>
+                        </li>
+                        {/foreach}
+                    </ul>
+                    {/foreach}
+                </div>
+            </div>
+            <!--m plist-->
+        </div>
+    </div>
+    <!--<div class="clear"></div>-->
+    {/foreach}
+    <!--floors-list-->
+
+
 </div>
-<div class="clear"></div>
-{/foreach}
-<!--floors-list-->
 
 
 <script type='text/javascript'>
