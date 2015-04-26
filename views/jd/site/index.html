@@ -79,7 +79,7 @@
                     <li class="current">
                         {set:$tmpId=$item['id'];}
                         <a href="{url:/site/groupon/id/$tmpId}"><img width="60px" height="60px" alt="{$item['title']}" src="{webroot:$item[img]}"></a>
-                        <a class="p_name" title="{$item['title']}" href="{url:/site/groupon/id/$tmpId}">{$item['title']}</a><p class="light_gray">团购价：<em>￥{$item['regiment_price']}</em></p>
+                        <a class="p_name" title="{$item['title']}" href="{url:/site/groupon/id/$tmpId}" style="float: none;text-align: left;">{$item['title']}</a><p class="light_gray">团购价：<em>￥{$item['regiment_price']}</em></p>
                     </li>
                     {/foreach}
 
