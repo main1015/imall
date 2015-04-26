@@ -2108,7 +2108,7 @@ dl.sorting dd.swith a.down{
     line-height:16px
 }
 .display_title{
-    position:relative;
+    /*position:relative;*/
     z-index:10;
     height:38px;
     padding-left:5px;
