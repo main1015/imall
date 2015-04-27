@@ -435,7 +435,7 @@ ol, ul {
 
 #nav-2013 {
     position: relative;
-    z-index: 6;
+    z-index: 101;
     height: 40px;
     padding-left: 210px;
     margin-bottom: 10px;
