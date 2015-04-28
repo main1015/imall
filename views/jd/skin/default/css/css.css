@@ -197,7 +197,7 @@ ol, ul {
 #my360buy-2013 {
     float: left;
     position: relative;
-    z-index: 9;
+    z-index: 103;
     width: 106px;
     height: 30px;
     margin-right: 10px;
@@ -324,7 +324,7 @@ ol, ul {
 #settleup-2013 {
     float: left;
     position: relative;
-    z-index: 9;
+    z-index: 103;
     width: 126px;
     height: 30px;
     margin-top: 9px;

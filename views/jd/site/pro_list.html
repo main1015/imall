@@ -98,21 +98,6 @@
 			<div class="title">{$this->catRow['name']}</div>
 			<div class="cont">
 
-				<!--品牌展示-->
-				{set:$brandList = search_goods::$brandSearch}
-				{if:$brandList}
-				<dl class="sorting">
-					<dt>品牌：</dt>
-					<dd id='brand_dd'>
-						<a class="nolimit current" href="{echo:search_goods::searchUrl('brand','')}">不限</a>
-						{foreach:items = $brandList}
-						<a href="{echo:search_goods::searchUrl('brand',$item['id'])}" id='brand_{$item['id']}'>{$item['name']}</a>
-						{/foreach}
-					</dd>
-				</dl>
-				{/if}
-				<!--品牌展示-->
-
 				<!--商品属性-->
 				{foreach:items = search_goods::$attrSearch}
 				<dl class="sorting">
@@ -213,7 +198,7 @@ function priceLink()
 		return '';
 	}
 	var urlVal = "{echo:IFilter::act(preg_replace('|&min_price=\w*&max_price=\w*|','',search_goods::searchUrl(array('min_price','max_price'),'')),'text')}";
-	window.location.href=urlVal+'&min_price='+minVal+'&max_price='+maxVal;
+	window.location.href=decodeHtml(urlVal)+'&min_price='+minVal+'&max_price='+maxVal;
 }
 
 //价格检查
@@ -255,4 +240,32 @@ jQuery(function(){
 	$('#{echo:IReq::get('min_price')}-{echo:IReq::get('max_price')}').addClass('current');
 	{/if}
 });
+
+function decodeHtml (s){
+    var HTML_DECODE = {
+        "&lt;" : "<",
+        "&gt;" : ">",
+        "&amp;" : "&",
+        "&nbsp;": " ",
+        "&quot;": "\"",
+        "&copy;": ""
+        // Add more
+    };
+    var REGX_HTML_DECODE = /&\w+;|&#(\d+);/g;
+    s = (s != undefined) ? s : this.toString();
+    return (typeof s != "string") ? s :
+            s.replace(REGX_HTML_DECODE,
+                    function($0, $1){
+                        var c = HTML_DECODE[$0];
+                        if(c == undefined){
+                            // Maybe is Entity Number
+                            if(!isNaN($1)){
+                                c = String.fromCharCode(($1 == 160) ? 32:$1);
+                            }else{
+                                c = $0;
+                            }
+                        }
+                        return c;
+                    });
+}
 </script>
