@@ -78,4 +78,21 @@ echo <<< OEF
 	</a>
 OEF;
 	}
+
+    public static function sideBarQQ($qqSer){
+        if(!$qqSer)
+        {
+            return null;
+        }
+        $qqArray = unserialize($qqSer);
+
+        foreach($qqArray as $val)
+        {
+echo <<< OEF
+    <li><a href="http://wpa.qq.com/msgrd?v=3&uin={$val['qq']}&site=qq&menu=yes" target="_blank" class="text">
+        <s class="g-icon-qq1"></s><span>{$val['name']}</span>
+    </a></li>
+OEF;
+        }
+    }
 }

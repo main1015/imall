@@ -13,6 +13,7 @@
 	<link type="image/x-icon" href="favicon.ico" rel="icon">
     <link rel="stylesheet" href="{skin:css/css.css}" />
     <link rel="stylesheet" href="{skin:css/hl.css}" />
+    <link rel="stylesheet" href="{skin:css/top.css}" />
 	{js:jquery}
 	{js:form}
 	{js:validate}
@@ -45,11 +46,36 @@
 //                    bxslider.show();
 //                }
             });
+
+            $(window).scroll(function(){
+                if($(window).scrollTop()>100){
+                    $("#side-bar .gotop").fadeIn();
+                }
+                else{
+                    $("#side-bar .gotop").hide();
+                }
+            });
+            $("#side-bar .gotop").click(function(){
+                $('html,body').animate({'scrollTop':0},500);
+            });
         });
     </script>
 </head>
 <body>
-    <!--shortcut-2013-->
+
+<ul id="side-bar" class="side-pannel side-bar">
+    <li>
+    <a href="javascript:;" class="gotop" style="display:none;"><s class="g-icon-top"></s></a>
+    </li>
+    {set:Sonline::sideBarQQ($siteConfig->service_online)}
+    {if:!$this->user}
+    <li>
+    <a href="{url:/simple/login?callback=$callback}" target="_blank" class="text"><span>登录</span></a>
+    </li>
+    {/if}
+</ul>
+
+<!--shortcut-2013-->
     <div id="shortcut-2013">
         <div class="w">
             <ul class="fl lh">
