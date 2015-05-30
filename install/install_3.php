@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>IMall安装向导(三)</title>
+<title>爱家商场安装向导(三)</title>
 <link rel="stylesheet" href="css/install.css" />
 <script type='text/javascript' src='javascript/jquery-1.4.4.min.js'></script>
 </head>
 <body>
 <div class="container">
-    <div class="head"><img src="images/logo.png" width="100" height="45" alt="iMall安装向导" /></div>
+    <div class="head"><img src="images/logo.png" width="100" height="45" alt="爱家商场安装向导" /></div>
 	<div class="ins_box clearfix">
 		<div class="cont clearfix">
 			<ul class="step">

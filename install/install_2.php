@@ -5,12 +5,12 @@ $checkObj = new checkConfig();
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>IMall安装向导(二)</title>
+<title>爱家商场安装向导(二)</title>
 <link rel="stylesheet" href="css/install.css" />
 </head>
 <body>
 <div class="container">
-    <div class="head"><img src="images/logo.png" width="100" height="45" alt="iMall安装向导" /></div>
+    <div class="head"><img src="images/logo.png" width="100" height="45" alt="爱家商场安装向导" /></div>
 	<div class="ins_box clearfix">
 		<div class="cont clearfix">
 			<ul class="step">
@@ -29,7 +29,7 @@ $checkObj = new checkConfig();
 
 				<div class="red_box" style='display:none' id='error_div'>
 					<img src="images/error.gif" width="16" height="15" />
-					您的系统配置不具备安装IMall软件，有疑问可以访问：<a href='http://bbs.imall.com' target='_blank'>http://bbs.imall.com</a>
+					您的系统配置不具备安装爱家商场软件，有疑问可以访问：<a href='http://bbs.imall.com' target='_blank'>http://bbs.imall.com</a>
 				</div>
 
 				<div class="gray_box">
