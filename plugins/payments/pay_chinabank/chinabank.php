@@ -103,6 +103,8 @@ class chinabank extends paymentPlugin
     	$return['v_moneytype'] = "CNY";
     	$return['v_url']       = $this->callbackUrl;
 
+        $return['remark2'] = "[url:={$this->callbackUrl}]";
+
     	$text                  = $return['v_amount'].$return['v_moneytype'].$return['v_oid'].$return['v_mid'].$return['v_url'].$key;
 		$return['v_md5info']   = strtoupper(md5($text));
 
