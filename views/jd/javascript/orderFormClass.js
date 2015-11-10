@@ -51,7 +51,7 @@ function orderFormClass()
 		this.orderAmount = this.orderAmount <=0 ? 0 : this.orderAmount;
 
 		//刷新DOM数据
-		$('#final_sum').text(this.orderAmount);
+		$('#final_sum').text(this.orderAmount.toFixed(2));
 		$('[name="ticket_value"]').text(this.ticketPrice);
 		$('#delivery_fee_show').text(this.deliveryPrice);
 		$('#protect_price_value').text(this.protectPrice);

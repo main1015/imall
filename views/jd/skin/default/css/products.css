@@ -1,0 +1,160 @@
+.recommends.w{
+    margin: 15px auto;
+}
+#fitting-suit .mc {
+    padding: 10px 0;
+    border: 1px solid #ddd;
+    border-top: none;
+    overflow: visible;
+}
+
+#fitting-suit .uc_title{
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+#fitting-suit .uc_title .current{
+    height: 32px;
+    border-right: 1px solid #ddd;
+    border-top: 2px solid #e4393c;
+    margin-top: -4px;
+    color: #e4393c;
+    background-color: #fff;
+    display: list-item;
+    position: absolute;
+    list-style: none;
+}
+
+#fitting-suit .stabcon {
+    margin-top: 10px;
+    clear: both;
+}
+
+#fitting-suit .master {
+    float: left;
+    width: 150px;
+    padding: 0 0 0 10px;
+    text-align: center;
+    overflow: hidden;
+}
+#fitting-suit .infos {
+    float: right;
+    width: 190px;
+    line-height: 20px;
+    margin-top: 10px;
+}
+#fitting-suit .infos .p-suit strong {
+    color: #E4393C;
+}
+#fitting-suit .infos .p-name {
+    height: 3em;
+    overflow: hidden;
+    line-height: 1.5em;
+}
+#fitting-suit .infos>div{
+    margin-left: 35px;
+}
+
+#fitting-suit .master s,
+#fitting-suit .suits s,
+#fitting-suit .infos s,
+#fitting-suit .btn-buy{
+    background-image: url(../images/img/icon.png);
+    background-repeat: no-repeat;
+}
+#fitting-suit .infos s {
+    float: left;
+    width: 24px;
+    height: 22px;
+    background-position: -30px -260px;
+    margin-top: 40px;
+}
+#fitting-suit .suits li.last-item s{
+    display: none;
+}
+
+#fitting-suit .current span {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 12px;
+    /*border-left: 1px solid #ddd;*/
+    /*border-right: 1px solid #ddd;*/
+    color: #e4393c;
+    font: 700 15px/30px 'microsoft yahei';
+}
+#fitting-suit .stab {
+    overflow: hidden;
+    padding-bottom: 15px;
+}
+#fitting-suit .stab .scurr {
+    color: #e4393c;
+}
+#fitting-suit .stab li {
+    padding: 0 15px;
+    height: 16px;
+    cursor: pointer;
+    border-left: 1px solid #D4D1C8;
+    line-height: 16px;
+    text-align: center;
+    color: #005aa0;
+    margin-bottom: 10px;
+    margin-left: -1px;
+    white-space: nowrap;
+}
+#fitting-suit .suits {
+    width: 788px;
+}
+
+#fitting-suit .suits {
+    float: left;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 580px;
+}
+#fitting-suit .suits ul {
+    float: left;
+    height: 100%;
+    overflow: hidden;
+}
+#fitting-suit .suits li {
+    width: 197px;
+    padding-left: 0;
+}
+
+#fitting-suit .master s, #fitting-suit .suits li s {
+    float: right;
+    display: inline;
+    width: 24px;
+    height: 22px;
+    background-position: 0 -260px;
+    margin-top: 40px;
+    margin-right: 3px;
+}
+
+#fitting-suit .p-img {
+    padding: 5px 0;
+    overflow: hidden;
+}
+#fitting-suit .p-name {
+    height: 3em;
+    overflow: hidden;
+}
+#fitting-suit .suits li .p-name {
+    width: 138px;
+}
+#fitting-suit a{
+    text-decoration: none;
+}
+#fitting-suit .btn-buy {
+    display: block;
+    width: 77px;
+    height: 25px;
+    margin-top: 10px;
+    background-position: -166px -112px;
+    text-align: center;
+    line-height: 25px;
+    color: #fff;
+    font-weight: 700;
+}
+.J_selected{
+    color: #005AA0;
+}

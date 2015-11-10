@@ -51,10 +51,10 @@ class Menu
 	     		'/member/group_list' => '会员组列表',
 //	     		'/member/withdraw_list'=>'会员提现管理'
 			),
-//			'商户管理' => array(
-//				'/member/seller_list' => '商户列表',
-//				'/member/seller_edit' => '添加商户',
-//			),
+			'商户管理' => array(
+				'/member/seller_list' => '商户列表',
+				'/member/seller_edit' => '添加商户',
+			),
 			'信息处理' => array(
 				'/comment/suggestion_list'  => '建议管理',
 				'/comment/refer_list'		=> '咨询管理',
@@ -109,10 +109,10 @@ class Menu
 //				'/market/account_list'   => '充值操作记录',
 				'/market/operation_list' => '后台操作记录',
 			),
-//			'商户数据统计'=>array(
-//				'/market/order_goods_list' => '货款明细列表',
-//				'/market/bill_list' => '货款结算申请',
-//			)
+			'商户数据统计'=>array(
+				'/market/order_goods_list' => '货款明细列表',
+				'/market/bill_list' => '货款结算申请',
+			)
 		),
 
 
@@ -122,7 +122,7 @@ class Menu
     		),
         	'网站管理'=>array(
         		'/system/conf_base' => '网站设置',
-//        		'/system/conf_ui'   => '主题设置',
+        		'/system/conf_ui'   => '主题设置',
         	),
         	'支付管理'=>array(
             	'/system/payment_list' => '支付方式'

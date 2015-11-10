@@ -502,6 +502,54 @@ class Site extends IController
 			ISafe::set('visit',$visit);
 		}
 
+        // 获取商品的推荐商品
+        $tb_recommend = new IModel('goods_recommend');
+        $recommends_data = $tb_recommend->query('goods_id = '.$goods_id);
+
+        if($recommends_data){
+            $goods_ids = array();
+            $recommends = array();
+            foreach($recommends_data as $recommend){
+                $recommend_ids = unserialize($recommend['recommend_ids']);
+                $goods_ids = array_merge($goods_ids, $recommend_ids);
+                $suit = array('data'=>array_flip($recommend_ids), 'cross'=>$goods_info['sell_price'],
+                    'recommend'=>$recommend, 'is_data'=>false);
+                $recommends[] = $suit;
+            }
+
+            if($goods_ids){
+                $goods_data = $tb_goods->query("id in (".implode(",", $goods_ids).") AND is_del=0");
+
+//                $goods_info['recommends'] = $goods_data;
+//                $cross = $goods_info['sell_price'];
+
+                foreach($goods_data as $gd){
+                    foreach($recommends as &$re){
+                        if(array_key_exists($gd['id'], $re['data'])){
+                            $re['data'][$gd['id']] = $gd;
+                            $re['cross'] += $gd['sell_price'];
+                            $re['is_data'] = true;
+                        }
+                    }
+//                    $cross += $gd['sell_price'];
+
+                }
+
+                foreach($recommends as &$re){
+                    if($re['is_data']){
+                        $re['market'] = number_format($re['cross'] * $re['recommend']['discount']/100,2);
+                        $re['saving'] = number_format($re['cross'] * (1- $re['recommend']['discount']/100),2);
+                    }
+                }
+                $goods_info['recommends'] = $recommends;
+//                $goods_info['market'] = number_format($cross * $recommend['discount']/100,2);
+//                $goods_info['cross'] = number_format($cross,2);
+//                $goods_info['recommend'] = $recommend;
+//                $goods_info['saving'] = number_format($cross * (1- $recommend['discount']/100),2);
+
+            }
+        }
+
 		$this->setRenderData($goods_info);
 		$this->redirect('products');
 	}

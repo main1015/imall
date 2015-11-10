@@ -715,8 +715,17 @@ class Simple extends IController
 		}
 		else
 		{
-			//计算购物车中的商品价格
-			$result = $countSumObj->cart_count();
+            $rid        = IFilter::act(IReq::get('rid'),'int');
+            if($id!=0 && $rid!=0){
+                // 计算推荐套装的商品价格
+                $result = $countSumObj->suit_count($id, $rid);
+                $this->gid       = $id;
+                $this->rid       = $rid;
+//                $this->type      = '_suit';
+            }else{
+                //计算购物车中的商品价格
+                $result = $countSumObj->cart_count();
+            }
 		}
 
 		if($result['count'] == 0)
@@ -891,12 +900,19 @@ class Simple extends IController
     	}
     	else
     	{
-			//计算购物车中的商品价格$goodsResult
-			$goodsResult = $countSumObj->cart_count();
+            $rid           = IFilter::act(IReq::get('direct_rid'),'int');
+            if($gid!=0 && $rid!=0){
+                // 计算推荐套装的商品价格
+                $goodsResult = $countSumObj->suit_count($gid, $rid);
+            }else{
+                //计算购物车中的商品价格$goodsResult
+                $goodsResult = $countSumObj->cart_count();
 
-			//清空购物车
-	    	$cartObj = new Cart();
-	    	$cartObj->clear();
+                //清空购物车
+                $cartObj = new Cart();
+                $cartObj->clear();
+            }
+
     	}
 
     	//判断商品商品是否存在

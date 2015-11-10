@@ -22,6 +22,15 @@ class Goods extends IController
 		$this->layout = '';
 		$this->redirect('select_spec');
 	}
+
+    /**
+     * 选择套装商品数据
+     */
+    function select_suit()
+    {
+        $this->layout = '';
+        $this->redirect('select_suit');
+    }
 	/**
 	 * @brief 商品添加中图片上传的方法
 	 */

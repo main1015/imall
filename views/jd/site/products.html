@@ -15,6 +15,7 @@
 <script type="text/javascript" src="{theme:javascript/jquery.jqzoom/js/jquery.jqzoom-core-pack.js}"></script>
 
 <link rel="stylesheet" type="text/css" href="{theme:javascript/jquery.bxSlider/jquery.bxslider.css}" />
+<link rel="stylesheet" type="text/css" href="{theme:skin/default/css/products.css}" />
 <script type="text/javascript" src="{theme:javascript/jquery.bxSlider/jquery.bxSlider.min.js}"></script>
 
 <div class="position"><span>您当前的位置：</span><a href="{url:}">首页</a>{foreach:items=$breadGuide} » <a href="{url:/site/pro_list/cat/$item[id]}">{$item['name']}</a>{/foreach} » {$name}</div>
@@ -243,6 +244,87 @@
 	<a class="zoom blue" href="{url:/site/pic_show/id/$id}">点击看大图</a>
 	{/if}
 </div>
+
+{if:isset($recommends)}
+<!-- 推荐套装 -->
+<div class="w recommends">
+    <div id="out-of-stock" class="m m2 hide out-of-stock"></div>
+    <div class="m m1 hide" id="fitting-suit" style="display: block;">
+        <div class="uc_title" name="showButton">
+            <label class="current"><span>推荐套装</span></label>
+        </div>
+        <div class="mc">
+            <div class="ui-switchable-panel hide ui-switchable-panel-selected" style="display: block;">
+                <div id="fitting-con" class="fitting-content" clstag="shangpin|keycount|product|tuijianpeijian_2">
+                    <ul class="stab lh">
+                        {foreach:items=$recommends key=$key}
+                        <li class="ui-switchable-item {if:$key==0}scurr{/if}" data-key="{$key}" title="{$item['recommend']['name']}">{$item['recommend']['name']}</li>
+                        {/foreach}
+                    </ul>
+                    <div class="stabcon clearfix">
+                        {foreach:items=$recommends key=$key}
+                        <div class="ui-switchable-panel {if: $key!=0}hide{/if}" data-value="{$key}">
+                            <div class="master"><s></s>
+                                <div class="p-img">
+                                    <a href="{url:/site/products/id/$id}" target="_blank">
+                                        <img width="100" height="100" src="{url:/pic/thumb/img/$img/w/58/h/58}">
+                                    </a>
+                                </div>
+                                <div class="p-name">
+                                    <a href="{url:/site/products/id/$id}" target="_blank" title="{$name}">{$name}</a>
+                                </div>
+                                <div class="p-price">
+                                    <label class="p-price">销售价：<strong class="J-p-675802">￥{$sell_price}</strong></label>
+                                </div>
+                            </div>
+                            <div class="suits">
+                                {set:$rc = count($item['data'])}
+                                {set:$rwc = $rc * 197 + 15}
+                                <ul class="lh" style="width:{$rwc }px;">
+                                    {set:$k = 0;}
+                                    {foreach:items=$item['data'] item=$row key=$_k}
+                                    {set:$k += 1;}
+                                    <li class="fore{$k} {if: $k==$rc}last-item{/if} "><s></s>
+                                        <div class="p-img">
+                                            <a href="{url:/site/products/id/$row[id]}" target="_blank">
+                                                <img width="100" height="100" src="{url:/pic/thumb/img/$row[img]/w/58/h/58}">
+                                            </a>
+                                        </div>
+                                        <div class="p-name">
+                                            <a href="http://item.jd.com/675802.html" target="_blank" title="{$row['name']}">{$row['name']}</a>
+                                        </div>
+                                        <div class="choose">
+                                            <label class="p-price">销售价：<strong class="J-p-675802">￥{$row['sell_price']}</strong></label>
+                                        </div>
+                                    </li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                            <div class="infos">
+                                <s></s>
+                                <div class="p-name">
+                                    <span class="J_selected" href="#">{$item['recommend']['sketch']}</span>
+                                </div>
+                                <div class="p-suit">套&nbsp;装&nbsp;价：<strong class="J_res_sp">￥{$item['market']}</strong></div>
+
+                                <div class="p-price">
+                                    市&nbsp;场&nbsp;价：<del class="J_cal_jp J-p-212328">￥{$item['cross']}</del>
+                                </div>
+                                <div class="p-saving">立即节省：<span class="J_cal_mp">￥{$item['saving']}</span></div>
+                                <div class="btns">
+                                    <a class="btn-buy" href="javascript:buy_suit({$item['recommend']['id']});">立即购买</a>
+                                </div>
+                            </div>
+                        </div>
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--推荐套装-->
+{/if}
 
 <div class="wrapper clearfix container_2">
 
@@ -1193,4 +1275,29 @@ function buy_now()
 	//页面跳转
 	window.location.href = url;
 }
+
+//购买套装
+function buy_suit(rid){
+    var url = '{url:/simple/cart2/id/@id@/rid/@rid@}';
+    var id = {$id};
+    url = url.replace('@id@',id).replace('@rid@', rid);
+    //页面跳转
+    window.location.href = url;
+}
+
+//tab标签切换
+$("#fitting-suit .stab li").on("click", function(){
+
+    var $this = $(this);
+    var ul = $this.closest("ul");
+    var lis = ul.find("li");
+    lis.removeClass("scurr");
+    $this.addClass("scurr");
+    var tabs = $("#fitting-suit .ui-switchable-panel");
+    tabs.addClass("hide");
+    var k = $this.data("key");
+    var tab = $("#fitting-suit .ui-switchable-panel[data-value="+k+"]");
+    tab.removeClass("hide");
+});
+
 </script>

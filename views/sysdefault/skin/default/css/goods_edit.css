@@ -1,0 +1,13 @@
+ul.gl{
+    text-align: left;
+}
+
+ul.gl li div.gls{
+    overflow: hidden;
+    max-width:180px
+}
+
+.gls img{
+    width: 24px;
+    height: 24px;
+}

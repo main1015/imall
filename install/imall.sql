@@ -593,6 +593,24 @@ CREATE TABLE `{pre}group_price` (
   index (`product_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='记录某件商品对于某组会员的价格关系表，优先权大于组设定的折扣率';
 
+----------------------------------------------------------
+
+--
+-- 表的结构 `{pre}goods_recommend`
+--
+
+DROP TABLE IF EXISTS `{pre}goods_recommend`;
+CREATE TABLE `{pre}goods_recommend` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户组ID',
+  `goods_id` int(11) unsigned NOT NULL COMMENT '商品ID',
+  `discount` decimal(15,2) NOT NULL DEFAULT '100.00' COMMENT '折扣率',
+  `name` varchar(255) DEFAULT NULL COMMENT '推荐套装名称',
+  `sketch` varchar(255) DEFAULT NULL COMMENT '推荐套装的简述',
+  `recommend_ids` text COMMENT '推荐商品ID,serialize',
+  PRIMARY KEY (`id`),
+  KEY `goods_id` (`goods_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='推荐商品表';
+
 -- --------------------------------------------------------
 
 --
@@ -1573,6 +1591,10 @@ INSERT INTO `{pre}ad_position` VALUES (6, '首页中部通栏', 0, 0, 1, 1);
 INSERT INTO `{pre}ad_position` VALUES (7, '首页右上方198*104', 198, 104, 1, 1);
 INSERT INTO `{pre}ad_position` VALUES (8, '商品搜索结果页左侧', 198, 120, 1, 1);
 INSERT INTO `{pre}ad_position` VALUES (10, '文章-公告内容页左册', 0, 0, 1, 1);
+INSERT INTO `{pre}ad_position` VALUES (11, '首页中部1', 484, 260, 1, 1);
+INSERT INTO `{pre}ad_position` VALUES (12, '首页中部2', 241, 260, 1, 1);
+INSERT INTO `{pre}ad_position` VALUES (13, '首页中部3', 241, 260, 1, 1);
+INSERT INTO `{pre}ad_position` VALUES (14, '首页中部4', 241, 260, 1, 1);
 
 --
 -- 导出表中的数据 `{pre}ad_manage`
@@ -1583,6 +1605,12 @@ INSERT INTO `{pre}ad_manage` VALUES (18, '首页右上方', 1, 7, 'http://www.te
 INSERT INTO `{pre}ad_manage` VALUES (19, '商品搜索结果页198*120', 1, 8, 'http://www.test.com', 99, 198, 120, '2014-05-05', '2020-06-10', 'upload/2011/06/07/20110607105655941.png', '1',0);
 INSERT INTO `{pre}ad_manage` VALUES (22, '文章公告内容页左侧', 1, 10, 'http://www.test.com', 99, 0, 0, '2014-05-02', '2020-12-10', 'upload/2011/06/07/20110607105620728.png', '1',0);
 INSERT INTO `{pre}ad_manage` VALUES (24, '首页中部通栏广告', 1, 6, 'http://www.test.com', 99, 0, 0, '2014-05-03', '2020-06-11', 'upload/2011/06/07/20110607105547573.png', '首页中部通栏广告',0);
+
+INSERT INTO `{pre}ad_manage` VALUES (25, '首页中部广告1-484*260', 1, 11, 'http://www.test.com', 99, 484, 260, '2014-05-03', '2020-06-11', 'upload/2011/06/07/20110607105547573.png', '首页中部广告1-484*260',0);
+INSERT INTO `{pre}ad_manage` VALUES (26, '首页中部广告2-241*260', 1, 12, 'http://www.test.com', 99, 241, 260, '2014-05-03', '2020-06-11', 'upload/2011/06/07/20110607105547573.png', '首页中部广告2-241*260',0);
+INSERT INTO `{pre}ad_manage` VALUES (27, '首页中部广告3-241*260', 1, 13, 'http://www.test.com', 99, 241, 260, '2014-05-03', '2020-06-11', 'upload/2011/06/07/20110607105547573.png', '首页中部广告3-241*260',0);
+INSERT INTO `{pre}ad_manage` VALUES (28, '首页中部广告4-241*260', 1, 14, 'http://www.test.com', 99, 241, 260, '2014-05-03', '2020-06-11', 'upload/2011/06/07/20110607105547573.png', '首页中部广告4-241*260',0);
+
 
 --
 -- 导出表中的数据 `{pre}areas`

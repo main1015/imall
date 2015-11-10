@@ -95,4 +95,23 @@ echo <<< OEF
 OEF;
         }
     }
+
+	public static function showQQ($tel, $qqSer){
+		if(!$qqSer)
+		{
+			return null;
+		}
+		$qqArray = unserialize($qqSer);
+
+$div = <<< OEF
+		<b>服务热线</b>
+		<strong>{$tel}</strong>
+OEF;
+
+		foreach($qqArray as $val) {
+
+			$div .= "<a class='service_kefu' href='http://wpa.qq.com/msgrd?v=3&uin={$val['qq']}&site=qq&menu=yes' target='_blank'>{$val['name']}</a>";
+		}
+		echo $div;
+	}
 }

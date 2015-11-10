@@ -3,6 +3,7 @@
 {set:$swfloadObject = new Swfupload();$swfloadObject->show();}
 {js:artTemplate}
 <script type="text/javascript" src="{theme:javascript/event.js}"></script>
+<link rel="stylesheet" type="text/css" href="{theme:skin/default/css/goods_edit.css}" />
 
 <div class="headbar clearfix">
 	<div class="position"><span>商品</span><span>></span><span>商品管理</span><span>></span><span>商品编辑</span></div>
@@ -10,6 +11,7 @@
 		<li id="li_1" class="selected"><a href="javascript:void(0)" hidefocus="true" onclick="select_tab('1')">商品信息</a></li>
 		<li id="li_2"><a href="javascript:void(0)" hidefocus="true" onclick="select_tab('2')">描述</a></li>
 		<li id="li_3"><a href="javascript:void(0)" hidefocus="true" onclick="select_tab('3')">营销选项</a></li>
+		<li id="li_4"><a href="javascript:void(0)" hidefocus="true" onclick="select_tab('4')">推荐套装</a></li>
 	</ul>
 </div>
 
@@ -302,6 +304,89 @@
 				</table>
 			</div>
 
+            <div id="table_box_4" cellpadding="0" cellspacing="0" style="display:none">
+                <table class="form_table">
+                    <col width="150px" />
+                    <col />
+                    <tr>
+                        <th>添加套餐：</th>
+                        <td>
+                            <button class="btn" onclick="addAttr()" type="button"><span class="add">添加套餐</span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <table width="90%" class="border_table">
+                                <thead>
+                                <tr>
+                                    <th>套装名称</th>
+                                    <th>套装简述</th>
+                                    <th>折扣率</th>
+                                    <th>搭配商品</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="suit_list"></tbody>
+
+                                <!--套餐列表-->
+                                <script type='text/html' id='attrListTemplate'>
+                                    <%for(var item in templateData){%>
+                                    <%include('attrTrTemplate',{'item':templateData[item], 'key':item})%>
+                                    <%}%>
+                                </script>
+
+                                <!--套餐单行-->
+                                <script type='text/html' id='attrTrTemplate'>
+                                    <tr class='td_c' data-index="<%=key%>">
+                                        <td>
+                                            <input name='rg[<%=key%>][id]' type='hidden' value="<%=item['id']%>" />
+                                            <input name='rg[<%=key%>][name]' class='small' type='text' pattern='required' value="<%=item['name']%>" />
+                                        </td>
+                                        <td>
+                                            <input name='rg[<%=key%>][sketch]' class='normal' type='text' pattern='required' value="<%=item['sketch']%>" />
+                                        </td>
+                                        <td>
+                                            <input name='rg[<%=key%>][discount]' class='small' type='text' pattern='required' value="<%=item['discount']%>" style="width:45px;"/>%
+                                        </td>
+                                        <td>
+                                            <%include('specListTemplate',{'templateData':item['goods'], 'key': key})%>
+                                        </td>
+                                        <td>
+                                            <img class="opeadd" src="{skin:images/admin/icon_add.gif}" onclick="addGoods(this)" alt="添加"/>
+                                            <img class="opeedit" style="display:none;" src="{skin:images/admin/icon_edit.gif}" alt="修改"/>
+                                            <img class="operator" src="{skin:images/admin/icon_del.gif}" alt="删除" onclick="delAttr(this)" />
+                                        </td>
+                                    </tr>
+                                </script>
+
+                                <!--商品列表模板-->
+                                <script type='text/html' id='specListTemplate'>
+                                    <ul class='gl'>
+
+                                        <%for(var item in templateData){%>
+
+                                        <%include('specTrTemplate',{'item':templateData[item], 'key':key})%>
+                                        <%}%>
+                                    </ul>
+                                </script>
+
+                                <!--商品单行模板-->
+                                <script type='text/html' id='specTrTemplate'>
+                                    <li>
+                                        <div class="gls">
+                                            <input name='rg[<%=key%>][rid][]' type='hidden' value="<%=item['id']%>" />
+                                            <img src="<%=item['img']%>" alt="<%=item['name']%>">
+                                            <span><%=item['name']%></span>
+                                        </div>
+                                    </li>
+                                </script>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
 			<table class="form_table">
 				<col width="150px" />
 				<col />
@@ -379,8 +464,57 @@ $(function()
 
 	//编辑器载入
 	KindEditorObj = KindEditor.create('#content',{"filterMode":false});
+
+    //初始化套装
+    {if:isset($recommends)}
+        var recListHtml = template.render('attrListTemplate',{'templateData':{echo:JSON::encode($recommends)}});
+        $('#suit_list').html(recListHtml);
+        $('#suit_list').data("index", {echo:count($recommends)});
+    {/if}
 });
 
+//输入筛选商品的条件
+function searchGoodsCallback(goodsList)
+{
+
+    goodsList.each(function()
+    {
+        var temp = $.parseJSON($(this).attr('data'));
+        var content = {
+            "data":
+            {
+                "id":temp.goods_id,
+                "name":temp.name,
+                "img":temp.img,
+                "sell_price":temp.sell_price,
+                "thumbnail":temp.thumbnail,
+                "store_nums":temp.store_nums
+            }
+        };
+        relationCallBack(content);
+    });
+}
+
+//关联商品回调处理函数
+function relationCallBack(content,regimentImg)
+{
+    if(content)
+    {
+        regimentImg = !regimentImg ? content['data']['thumbnail'] : regimentImg;
+
+//        var imgUrl = "{webroot:@url@}";
+//        imgUrl     = imgUrl.replace("@url@",regimentImg);
+        var imgUrl = regimentImg;
+
+        var index = $("#suit_list tr[data-open='1']").data("index");
+        var html = '<li><div class="gls"><input name="rg['+index+'][rid][]" type="hidden" value="'+content['data']['id']+'">'
+                +'<img src="'+imgUrl+'" title="'+content['data']['name']+'" style="max-width:140px;" /><span>'+content['data']['name']+ '</span></div></li>';
+
+
+        $("#suit_list tr[data-open='1']").find('td ul.gl').append(html);
+        $("#suit_list tr[data-open='1']").attr("data-open", 0);
+    }
+}
 //初始化货品表格
 function initProductTable()
 {
@@ -742,5 +876,35 @@ function collectAct()
 			alert(json.msg);
 		}
 	});
+}
+
+
+//添加推荐套装商品
+function addGoods(ele)
+{
+    $(ele).closest("tr").attr("data-open", 1);
+    console.log( $(ele));
+    searchGoods('{url:/block/search_goods/type/radio}',searchGoodsCallback);
+}
+
+//添加一个套装商品
+function addAttr()
+{
+    var trs = $("#suit_list tr");
+    var index = $("#suit_list").data("index");
+    if(index == undefined || index == null){
+        index = trs.length;
+
+    }
+    $("#suit_list").data("index", index + 1);
+    var attrTrHtml = template.render('attrTrTemplate',{'item':[], 'key': index});
+    $('#suit_list').append(attrTrHtml);
+}
+
+
+//删除推荐套装商品
+function delAttr(curr_attr)
+{
+    $(curr_attr).parent().parent().remove();
 }
 </script>

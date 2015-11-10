@@ -224,6 +224,9 @@ function selectTakeself(deliveryId)
 
 		<input type='hidden' name='timeKey' value='{echo:time()}' />
 		<input type='hidden' name='direct_gid' value='{$this->gid}' />
+        {if:isset($this->rid)}
+        <input type='hidden' name='direct_rid' value='{$this->rid}' />
+        {/if}
 		<input type='hidden' name='direct_type' value='{$this->type}' />
 		<input type='hidden' name='direct_num' value='{$this->num}' />
 		<input type='hidden' name='direct_promo' value='{$this->promo}' />

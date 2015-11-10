@@ -87,6 +87,12 @@ class Block extends IController
 
 		$goodsDB    = new IModel($table_name);
 		$this->data = $goodsDB->query($where,$fields,'go.id','desc',$show_num);
+        $data = array();
+        foreach($this->data as $row){
+            $row['thumbnail'] = IUrl::creatUrl('/pic/thumb/img/'.$row['img'].'/w/24/h/24');
+            $data[] = $row;
+        }
+        $this->data = $data;
 		$this->type = IFilter::act(IReq::get('type'));//页面input的type类型，比如radio，checkbox
 		$this->redirect('goods_list');
 	}

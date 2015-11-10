@@ -11,7 +11,7 @@ class SystemSeller extends IController
 
     public function init()
     {
-        IError::show(404,"您查找的页面已经不存在了");
+//        IError::show(404,"您查找的页面已经不存在了");
     }
 
 	/**

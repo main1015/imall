@@ -161,9 +161,9 @@ class Member extends IController
     /**
      * @brief 商家列表 (myth)
      */
-    function seller_list(){
-        IError::show(404,"您查找的页面已经不存在了");
-    }
+//    function seller_list(){
+//        IError::show(404,"您查找的页面已经不存在了");
+//    }
 
 	/**
 	 * @brief 会员列表
