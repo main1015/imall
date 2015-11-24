@@ -1013,7 +1013,7 @@ ul.list {
 }
 
 ul.list li {
-	height: 15px;
+	height: 25px;
 	line-height: 15px;
 	margin: 0 0 5px;
 	padding: 8px 0 0 9px;
@@ -2406,7 +2406,7 @@ ul.ranklist li.current {
 
 ul.ranklist li.current a.p_name {
 	display: block;
-	line-height: 40px;
+	/*line-height: 40px;*/
 	overflow: hidden;
 	width: 100%;
 }

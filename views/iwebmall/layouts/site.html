@@ -88,14 +88,15 @@
                 <div class="head-operates-logined fr" style="width:280px">
                     <div class="j-user-img" style="width: 54px; height: 45px; float: left; position: relative;">
                         <a href="{url:/ucenter}">
-                            <img class="user-img" style="margin-top: -3px;" src="{url:/pic/thumb/img/$item[img]/w/45/h/45}" width="45" height="45" onerror="this.src='{skin:images/front/user_ico.gif}'" alt="">
+                            {set:$user_ico = $this->user['head_ico']}
+                            <img class="user-img" style="margin-top: -3px;" src="{url:/pic/thumb/img/$user_ico/w/45/h/45}" width="45" height="45" onerror="this.src='{skin:images/front/user_ico.gif}'" alt="">
                         </a>
                         <div class="logined j-logined" style="height: 0px; opacity: 0; display: none; overflow: hidden;">
                             <div style="border: 1px solid #ddd;background-color: #fff;position: absolute;">
                                 <em class="trangle"></em>
                                 <p class="logined-user">
                                     <b class="fl">{echo:$this->user['username']}</b>
-                                    <img class="user-img" style="margin-top: -3px; float:right;" src="{url:/pic/thumb/img/$item[img]/w/45/h/45}" onerror="this.src='{skin:images/front/user_ico.gif}'" width="45" height="45">
+                                    <img class="user-img" style="margin-top: -3px; float:right;" src="{url:/pic/thumb/img/$user_ico/w/45/h/45}" onerror="this.src='{skin:images/front/user_ico.gif}'" width="45" height="45">
                                 </p>
                                 <ul class="logined-item">
                                     <li class="order"><i></i><a href="{url:/ucenter/order}">订单中心</a></li>
